@@ -1,0 +1,58 @@
+﻿@model FinanceYourLife.Models.CostesIniciales
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CostesIniciales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PorcPrima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PorcPrima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PorcEstructuracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PorcEstructuracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PorcColocacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PorcColocacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PorcFlotacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PorcFlotacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PorcCAVALI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PorcCAVALI)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDCostesIniciales }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

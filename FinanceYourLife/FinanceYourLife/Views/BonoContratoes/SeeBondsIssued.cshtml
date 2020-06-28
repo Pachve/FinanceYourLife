@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "SeeBondsIssued";
+    Layout = "~/Views/Shared/_Layout_SeeBondsIssued.cshtml";
+} 
+
+<!--Bono 1-->
+<div class="tabla">
+    <div class="titulo">
+        <i class="fa fa-gem fa-3x"></i>
+        <h2>Bono 1</h2>
+    </div> 
+
+    <div class="precio">
+        <h3>$ <span>250 000</span></h3>
+    </div> 
+
+    <div>
+        <div class="descripcion">
+            <ul>
+                <li><i class="fa fa-check"></i>Valor Comercial: $ 255 000</li>
+                <li><i class="fa fa-check"></i>Tasa de Interés Anual: 8.45 %</li>
+                <li><i class="fa fa-check"></i>Tasa Anual de Descuento: 4.50 %</li>
+                <li><i class="fa fa-check"></i>Numero de Años: 3 años</li>
+                <li><i class="fa fa-check"></i>Fecha de Emisión: 06/10/18</li>
+            </ul>
+        </div>
+    </div> 
+
+    <div class="enlace">
+        <a href="@Url.Action("SeeBondsDetail","BonoContratoes", new { id=1 })">Ver Más</a>
+    </div>
+</div>
+<!--Bono 2-->
+<div class="tabla">
+    <div class="titulo">
+        <i class="fa fa-gem fa-3x"></i>
+        <h2>Bono 2</h2>
+    </div> 
+
+    <div class="precio">
+        <h3>$ <span>300 000</span></h3>
+    </div> 
+
+    <div>
+        <div class="descripcion">
+            <ul>
+                <li><i class="fa fa-check"></i>Valor Comercial: $ 305 000</li>
+                <li><i class="fa fa-check"></i>Tasa de Interés Anual: 9.50 %</li>
+                <li><i class="fa fa-check"></i>Tasa Anual de Descuento: 4.50 %</li>
+                <li><i class="fa fa-check"></i>Numero de Años: 5 años</li>
+                <li><i class="fa fa-check"></i>Fecha de Emisión: 23/03/19</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="enlace">
+        <a href="@Url.Action("SeeBondsDetail","BonoContratoes", new { id=2 })">Ver Más</a>
+    </div>
+</div>
+<!--Bono 3-->
+<div class="tabla">
+    <div class="titulo">
+        <i class="fa fa-gem fa-3x"></i>
+        <h2>Bono 3</h2>
+    </div> 
+
+    <div class="precio">
+        <h3>$ <span>400 000</span></h3>
+    </div> 
+
+    <div>
+        <div class="descripcion">
+            <ul>
+                <li><i class="fa fa-check"></i>Valor Comercial: $ 405 000</li>
+                <li><i class="fa fa-check"></i>Tasa de Interés Anual: 7.50 %</li>
+                <li><i class="fa fa-check"></i>Tasa Anual de Descuento: 4.50 %</li>
+                <li><i class="fa fa-check"></i>Numero de Años: 4 años</li>
+                <li><i class="fa fa-check"></i>Fecha de Emisión: 05/10/19</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="enlace">
+        <a href="@Url.Action("SeeBondsDetail","BonoContratoes", new { id=3 })">Ver Más</a>
+    </div>
+</div>

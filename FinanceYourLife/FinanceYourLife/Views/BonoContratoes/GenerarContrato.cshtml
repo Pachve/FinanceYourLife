@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Contrato de Compra de Bono";
+    Layout = "~/Views/Shared/_Layout_GenerarContrato.cshtml";
+    var ID = 0;
+}
+
+
+<div class="row justify-content-center form_login" style="width:1000px;height:auto">
+    <h1 style="font-family:'Times New Roman', Times, serif">REGLAMENTO DE BONOS CORPORATIVOS DE ALICORP</h1>
+    <br />
+    <h1 style="font-size:30px;font-family:'Times New Roman', Times, serif">TÉRMINOS Y CONDICIONES DE LOS VALORES Y OPERACIONES</h1> 
+    <br />
+    <h2>1. Marco estratégico de actuación</h2>
+    <p class="style_p">
+        La empresa Alicorp, en el marco del Programa de Creadores de Mercado,
+        de una gestión global de activos y pasivos financieros, y de su papel promotor
+        del desarrollo de la economía en las pequeñas y medianas empresas del mercado nacional, realizará emisiones de
+        Bonos Coporativos en el mercado primario, así como recompras y reventas de
+        esos mismos valores en el mercado secundario, con la finalidad de alcanzar
+        sus metas y objetivos estratégicos aprobados, en las condiciones establecidas
+        en este Reglamento.
+    </p>
+    <h2>2. Emisor o contraparte</h2>
+    <p class="style_p">Alicorp</p>
+    <h2>3. Unidad responsable</h2>
+    <p class="style_p">
+        El área de Finanzas de Alicorp, en representación de la
+        empresa.
+    </p>
+    <h2>4. Denominación</h2>
+    <p class="style_p">
+        Los Bonos Corporativos, en adelante bonos, tendrán la denominación específica
+        que se haya establecido en la respectiva convocatoria para su emisión inicial
+        en el mercado primario.
+    </p>
+    <h2>5. Naturaleza</h2>
+    <p class="style_p">
+        Los bonos son valores de contenido crediticio, nominativos, representados
+        mediante anotación en cuenta y libremente negociables.
+    </p>
+    <h2>6. Registro, transferencia y custodia</h2>
+    <p class="style_p">
+        El registro de propiedad de los titulares de los bonos, así como la transferencia
+        y custodia de dichos valores, se refleja exclusivamente en las anotaciones en
+        cuenta que mantiene el Registro Contable que administra CAVALI S.A. ICLV
+        (en adelante CAVALI), o la entidad que haga sus veces. Los bonos se listan en
+        la Bolsa de Valores de Lima.
+    </p>
+    <h2>7. Categoría de los bonos</h2>
+    <p class="style_p">
+        Los bonos son valores que representan obligaciones directas, generales e
+        incondicionales del Emisor. Su pago constituye una obligación que tiene el
+        mismo nivel de prioridad que las deudas preferentes del Emisor de igual
+        naturaleza, no aseguradas ni subordinadas.
+        Los bonos son instrumentos del tipo ‘bono convencional’, es decir, tienen
+        cupones fijos más el pago del principal al final, salvo en la eventualidad que
+        expresamente se indique otro tipo de características.
+    </p>
+    <h2>8. Moneda</h2>
+    <p class="style_p">
+        Los bonos son instrumentos de deuda en moneda nacional y extranjera(Dólares Americanos), nominal y cuyo
+        pago, por tanto, se hará también en dichas monedas. En este caso, la moneda que se utilizará en esta operación
+        es la moneda extranjera (Dólares Americanos).
+        En los casos que la Unidad Responsable considere conveniente, algunos de
+        los valores podrán ser en moneda nacional indexada, o podrán tener otro tipo
+        de características, según se establezca en la emisión inicial.
+    </p>
+    <h2>9. Plazo al vencimiento</h2>
+    <p class="style_p">
+        La fecha de redención de los bonos será la que la Unidad Responsable haya
+        determinado al momento de su primera emisión.
+        El plazo al vencimiento de los bonos será el que efectivamente exista entre la
+        fecha de liquidación de la operación resultante de la adjudicación de bonos en
+        el marco de las subastas efectuadas por la Unidad Responsable o resultante
+        de la negociación efectuada en los mecanismos centralizados de negociación
+        autorizados y la fecha de redención del respectivo bono.
+    </p>
+    <div class="form-group col-md-12" style="margin-top:40px"> 
+        <center>
+            <input type="radio" id="myCheck1" name="validarContrato" checked>
+            <label for="myCheck1" style="margin-right:20px">Estoy en Desacuerdo</label>
+            <input type="radio" id="myCheck2" name="validarContrato">
+            <label for="myCheck2">Estoy de Acuerdo</label>
+        </center>
+    </div>
+    <div class="form-group col-md-12" >
+        <div class="col-sm-12 col-xs-12"id="divBloque" style="margin-top:20px" hidden>
+            <center>
+                <a id="Cancelar" type="button" class="btn btn-success" style="font-size:20px;margin-right:8px;" href="#">Cancelar</a>
+                <a id="ComprarBono" type="button" class="btn btn-success" style="font-size:20px;margin-right:8px;" href="#">Comprar Bono</a>
+            </center>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#myCheck2').click(function () {
+        $('#divBloque').show();
+    }); 
+    $('#myCheck1').click(function () {
+        $('#divBloque').hide();
+    }); 
+    $('#ComprarBono').click(function () {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Se ha realizado la compra del bono con éxito!',
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Nueva Compra',
+            cancelButtonText: 'Ir al Home',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-success',
+            allowOutsideClick: false, 
+            allowEscapeKey: false,
+            allowEnterKey: false
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "/FlujoPeriodicoes/AgregarFlujosA_DB/1";
+            }   
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                window.location.href = "/FlujoPeriodicoes/AgregarFlujosA_DB/2";
+            }
+        })
+    });
+    $('#Cancelar').click(function () { 
+        window.history.go(-1);
+    });
+</script>

@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FinanceYourLifeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AgenteExterno">
+    <Key>
+      <PropertyRef Name="IDAgenteExterno" />
+    </Key>
+    <Property Name="IDAgenteExterno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SedePrincipal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="EmpresaEmisora" Relationship="Self.FK_AgenteExterno_EmpresaEmisora" FromRole="AgenteExterno" ToRole="EmpresaEmisora" />
+  </EntityType>
+  <EntityType Name="BonoContrato">
+    <Key>
+      <PropertyRef Name="IDBonoContrato" />
+    </Key>
+    <Property Name="IDBonoContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ValorComercial" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="ValorNominal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="NroAños" Type="Int32" Nullable="false" />
+    <Property Name="FrecuenciaPago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DiasPorAño" Type="Int32" Nullable="false" />
+    <Property Name="TipoTasaInteres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Capitalizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TasaInteresAnual" Type="Double" Nullable="false" />
+    <Property Name="TasaDescuentoAnual" Type="Double" Nullable="false" />
+    <Property Name="ImpuestoRenta" Type="Double" Nullable="false" />
+    <Property Name="FechaEmision" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FK_IDBonista" Type="Int32" Nullable="false" />
+    <Property Name="FK_IDCostesIniciales" Type="Int32" Nullable="false" />
+    <Property Name="FK_IDEmpresaEmisora" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CostesIniciales" Relationship="Self.FK_BonoContrato_CostesIniciales" FromRole="BonoContrato" ToRole="CostesIniciales" />
+    <NavigationProperty Name="EmpresaEmisora" Relationship="Self.FK_BonoContrato_EmpresaEmisora" FromRole="BonoContrato" ToRole="EmpresaEmisora" />
+    <NavigationProperty Name="UsuarioBonista" Relationship="Self.FK_BonoContrato_UsuarioBonista" FromRole="BonoContrato" ToRole="UsuarioBonista" />
+    <NavigationProperty Name="FlujoPeriodico" Relationship="Self.FK_FlujoPeriodico_BonoContrato" FromRole="BonoContrato" ToRole="FlujoPeriodico" />
+  </EntityType>
+  <EntityType Name="CostesIniciales">
+    <Key>
+      <PropertyRef Name="IDCostesIniciales" />
+    </Key>
+    <Property Name="IDCostesIniciales" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PorcPrima" Type="Double" Nullable="false" />
+    <Property Name="PorcEstructuracion" Type="Double" />
+    <Property Name="PorcColocacion" Type="Double" />
+    <Property Name="PorcFlotacion" Type="Double" />
+    <Property Name="PorcCAVALI" Type="Double" />
+    <NavigationProperty Name="BonoContrato" Relationship="Self.FK_BonoContrato_CostesIniciales" FromRole="CostesIniciales" ToRole="BonoContrato" />
+  </EntityType>
+  <EntityType Name="EmpresaEmisora">
+    <Key>
+      <PropertyRef Name="IDEmpresaEmisora" />
+    </Key>
+    <Property Name="IDEmpresaEmisora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RUC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SedePrincipal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rubro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FK_IDAgenteExterno" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AgenteExterno" Relationship="Self.FK_AgenteExterno_EmpresaEmisora" FromRole="EmpresaEmisora" ToRole="AgenteExterno" />
+    <NavigationProperty Name="BonoContrato" Relationship="Self.FK_BonoContrato_EmpresaEmisora" FromRole="EmpresaEmisora" ToRole="BonoContrato" />
+  </EntityType>
+  <EntityType Name="FlujoPeriodico">
+    <Key>
+      <PropertyRef Name="IDFlujoPeriodico" />
+    </Key>
+    <Property Name="IDFlujoPeriodico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bono" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="BonoIndexado" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Cupon" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Cuota" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Amortizacion" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Prima" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Escudo" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="FlujoEmisor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="FlujoEmisorEscudo" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="FlujoBonista" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="ValorBonoDCP" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="FK_IDBonoContrato" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BonoContrato" Relationship="Self.FK_FlujoPeriodico_BonoContrato" FromRole="FlujoPeriodico" ToRole="BonoContrato" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TipoUsuario">
+    <Key>
+      <PropertyRef Name="IDTipoUsuario" />
+    </Key>
+    <Property Name="IDTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UsuarioBonista" Relationship="Self.FK_TipoUsuario_UsuarioBonista" FromRole="TipoUsuario" ToRole="UsuarioBonista" />
+  </EntityType>
+  <EntityType Name="UsuarioBonista">
+    <Key>
+      <PropertyRef Name="IDUsuarioBonista" />
+    </Key>
+    <Property Name="IDUsuarioBonista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RUC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDTipoUsuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BonoContrato" Relationship="Self.FK_BonoContrato_UsuarioBonista" FromRole="UsuarioBonista" ToRole="BonoContrato" />
+    <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_TipoUsuario_UsuarioBonista" FromRole="UsuarioBonista" ToRole="TipoUsuario" />
+  </EntityType>
+  <Association Name="FK_AgenteExterno_EmpresaEmisora">
+    <End Role="AgenteExterno" Type="Self.AgenteExterno" Multiplicity="1" />
+    <End Role="EmpresaEmisora" Type="Self.EmpresaEmisora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgenteExterno">
+        <PropertyRef Name="IDAgenteExterno" />
+      </Principal>
+      <Dependent Role="EmpresaEmisora">
+        <PropertyRef Name="FK_IDAgenteExterno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BonoContrato_CostesIniciales">
+    <End Role="CostesIniciales" Type="Self.CostesIniciales" Multiplicity="1" />
+    <End Role="BonoContrato" Type="Self.BonoContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CostesIniciales">
+        <PropertyRef Name="IDCostesIniciales" />
+      </Principal>
+      <Dependent Role="BonoContrato">
+        <PropertyRef Name="FK_IDCostesIniciales" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BonoContrato_EmpresaEmisora">
+    <End Role="EmpresaEmisora" Type="Self.EmpresaEmisora" Multiplicity="1" />
+    <End Role="BonoContrato" Type="Self.BonoContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpresaEmisora">
+        <PropertyRef Name="IDEmpresaEmisora" />
+      </Principal>
+      <Dependent Role="BonoContrato">
+        <PropertyRef Name="FK_IDEmpresaEmisora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BonoContrato_UsuarioBonista">
+    <End Role="UsuarioBonista" Type="Self.UsuarioBonista" Multiplicity="1" />
+    <End Role="BonoContrato" Type="Self.BonoContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsuarioBonista">
+        <PropertyRef Name="IDUsuarioBonista" />
+      </Principal>
+      <Dependent Role="BonoContrato">
+        <PropertyRef Name="FK_IDBonista" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlujoPeriodico_BonoContrato">
+    <End Role="BonoContrato" Type="Self.BonoContrato" Multiplicity="1" />
+    <End Role="FlujoPeriodico" Type="Self.FlujoPeriodico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BonoContrato">
+        <PropertyRef Name="IDBonoContrato" />
+      </Principal>
+      <Dependent Role="FlujoPeriodico">
+        <PropertyRef Name="FK_IDBonoContrato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoUsuario_UsuarioBonista">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+    <End Role="UsuarioBonista" Type="Self.UsuarioBonista" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="IDTipoUsuario" />
+      </Principal>
+      <Dependent Role="UsuarioBonista">
+        <PropertyRef Name="IDTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FinanceYourLifeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AgenteExterno" EntityType="Self.AgenteExterno" />
+    <EntitySet Name="BonoContrato" EntityType="Self.BonoContrato" />
+    <EntitySet Name="CostesIniciales" EntityType="Self.CostesIniciales" />
+    <EntitySet Name="EmpresaEmisora" EntityType="Self.EmpresaEmisora" />
+    <EntitySet Name="FlujoPeriodico" EntityType="Self.FlujoPeriodico" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
+    <EntitySet Name="UsuarioBonista" EntityType="Self.UsuarioBonista" />
+    <AssociationSet Name="FK_AgenteExterno_EmpresaEmisora" Association="Self.FK_AgenteExterno_EmpresaEmisora">
+      <End Role="AgenteExterno" EntitySet="AgenteExterno" />
+      <End Role="EmpresaEmisora" EntitySet="EmpresaEmisora" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BonoContrato_CostesIniciales" Association="Self.FK_BonoContrato_CostesIniciales">
+      <End Role="CostesIniciales" EntitySet="CostesIniciales" />
+      <End Role="BonoContrato" EntitySet="BonoContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BonoContrato_EmpresaEmisora" Association="Self.FK_BonoContrato_EmpresaEmisora">
+      <End Role="EmpresaEmisora" EntitySet="EmpresaEmisora" />
+      <End Role="BonoContrato" EntitySet="BonoContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BonoContrato_UsuarioBonista" Association="Self.FK_BonoContrato_UsuarioBonista">
+      <End Role="UsuarioBonista" EntitySet="UsuarioBonista" />
+      <End Role="BonoContrato" EntitySet="BonoContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlujoPeriodico_BonoContrato" Association="Self.FK_FlujoPeriodico_BonoContrato">
+      <End Role="BonoContrato" EntitySet="BonoContrato" />
+      <End Role="FlujoPeriodico" EntitySet="FlujoPeriodico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoUsuario_UsuarioBonista" Association="Self.FK_TipoUsuario_UsuarioBonista">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="UsuarioBonista" EntitySet="UsuarioBonista" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

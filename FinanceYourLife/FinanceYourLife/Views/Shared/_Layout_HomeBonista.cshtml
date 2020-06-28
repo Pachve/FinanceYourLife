@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home User Bonista</title>
+    <link rel="stylesheet" href="~/Content/layoutHomeBonista.css" />
+    <link href="~/Content/StyleSignInSignUp.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="body_style"> 
+    <nav>
+        <a href="@Url.Action("HomeFinanceYourLife", "Home")" class="elements">
+            FinanceYourLife
+        </a>
+        <a href="@Url.Action("HomeBonista", "Home")" class="elements">
+            My Profile
+        </a>
+        <a href="@Url.Action("SeeBondsIssued", "BonoContratoes")" class="elements">
+            See Bonds Issued
+        </a>
+        <a href="@Url.Action("AllContracts", "BonoContratoes")" class="elements">
+            All Contract's
+        </a>
+        <a href="@Url.Action("SignOut", "UsuarioBonistas")" class="elements">
+            Sign Out
+        </a>
+        <div class="animation start-about"></div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p class="p_style">&copy; @DateTime.Now.Year - Finance Your Life</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "HomeFinanceYourLife";
+    Layout = "~/Views/Shared/_Layout_HomeFinanceYourLife.cshtml";
+} 
+<!DOCTYPE HTML>
+<html> 
+<head>
+    <link rel="stylesheet" href="~/Content/Automatic SlideShow.css" />
+    <link rel="stylesheet" href="~/FontAwesome/css/fontawesome.min.css"> <!--load all styles -->
+</head>
+<body class="landing">
+
+    <!-- Banner -->
+    <section id="banner" class="text_2">
+        <i class="icon fa fa-chart-line"></i>
+        <h2>Corporate bonds</h2>
+        <p>
+            Finance Your Life is an Alicorp partner company.
+        </p>
+        <ul class="actions">
+            <li><a href="https://www.alicorp.com.pe/pe/es/nosotros/" target="_blank" class="button big special">Read more</a></li>
+        </ul>
+    </section>
+    <!-- One -->
+    <section id="one" class="wrapper style1">
+        <div class="inner">
+            <article class="feature left">
+                <span class="image"><img src="~/Images/Objetivo.jpg" alt="" width="470" height="222" /></span>
+                <div class="content text_3">
+                    <h2>Our goals</h2>
+                    <p>The function of FinanceYourLife is to guarantee the perfect process of buying bonds issued by Alicorp; in addition to providing all the information required by the user.</p>
+                </div>
+            </article>
+            <article class="feature right">
+                <span class="image"><img src="~/Images/Somos.jpg" alt="" /></span>
+                <div class="content text_3">
+                    <h2>Trust us</h2>
+                    <p>FinanceYourLife is a highly reliable company because our employees are high-level professionals with extensive experience.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- Two -->
+    <section id="two" class="wrapper special">
+        <div class="inner">
+            <header class="major narrow">
+                <h2>Our headquarters</h2>
+                <br />
+                <p>You can find us in Miraflores, San Isidro and Callao</p>
+            </header>
+            <!--SlideShow-->
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="~/Images/sedeMiraflores_2.jpg" style="width:80%" class="style_img">
+                    <div class="text">MIRAFLORES</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="~/Images/sedeSanIsidro_2.jpg" style="width:80%" class="style_img">
+                    <div class="text">SAN ISIDRO</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="~/Images/sedeCallao.jpeg" style="width:80%" class="style_img">
+                    <div class="text">CALLAO</div>
+                </div>
+            </div>
+            <br>
+            <div style="text-align:center">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+    <!-- Three -->
+    <section id="three" class="wrapper style3 special">
+        <div class="inner">
+            <header class="major narrow text_2">
+                <h2>Work with us</h2>
+                <br />
+                <p>You can join us and strengthen your work and business experience.</p>
+                <p>If you are a student, we can help you with your professional practices.</p>
+            </header>
+        </div>
+    </section>
+    <!-- Four -->
+    <section id="four" class="wrapper style2 special">
+        <div class="inner">
+            <header class="major narrow text_2">
+                <h2>Contact us</h2>
+                <br />
+                <p>Complete the following fields and we will contact you.</p>
+            </header>
+            <form action="#" method="POST">
+                <center>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="inputNombre" placeholder="Name" name="name" required />
+                        <br />
+                        <input id="inputPhone" type="text" onkeypress="return onlyNumbers(event)" maxlength="13" value="+51 " name="phone" required>
+                        <br />
+                        <input type="text" class="form-control" id="inputMensaje" placeholder="Message" name="message" rows="4">
+                    </div>
+                </center>
+                <ul class="actions">
+                    <li><input type="reset" class="alt" value="Cancel" /></li>
+                    <li><input type="submit" class="special" value="Send" /></li>
+                </ul>
+            </form>
+        </div>
+    </section>
+    <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+    </script> 
+    <script src="~/Scripts/FunctionsForLoginRegister.js"></script>
+</body>
+</html>

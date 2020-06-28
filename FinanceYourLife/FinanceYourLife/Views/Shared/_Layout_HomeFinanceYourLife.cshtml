@@ -1,0 +1,129 @@
+﻿    
+@{
+    ViewBag.Title = "_Layout_HomeFinanceYourLife";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINANCE YOUR LIFE</title>
+
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    @Styles.Render("~/Content/css")
+    <!-- Scripts -->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/assets/css/main.css")
+    <!-- Scripts -->
+    @Scripts.Render("~/assets/js/jquery.min.js")
+    @Scripts.Render("~/assets/js/skel.min.js")
+    @Scripts.Render("~/assets/js/util.js")
+    @Scripts.Render("~/assets/js/main.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="alt">
+        @{
+            FinanceYourLife.Models.UsuarioBonista objUsuario = (FinanceYourLife.Models.UsuarioBonista)Session[FinanceYourLife.Constantes.SessionName.User];
+            if (objUsuario != null)
+            {
+                <h1><a href="~/"><i class="fa fa-user fa-2x"></i>  @objUsuario.Nombres @objUsuario.Apellidos</a></h1>
+            }
+            else
+            {
+                <h1><a href="~/"><i class="fa fa-chart-line fa-2x"></i>  FINANCE YOUR LIFE</a></h1>
+            }
+        }
+        <h2><a href="#nav">NAVIGATION MENU</a></h2>
+    </header>
+    <!-- Nav -->
+    <nav id="nav">
+        <ul class="links">
+            <li>
+                <a href="@Url.Action("HomeFinanceYourLife", "Home" )">
+                    <i class="fa fa-chart-line fa-2x"></i>  Finance Your Life
+                </a>
+            </li> 
+
+            @{
+                if (Session[FinanceYourLife.Constantes.SessionName.User] != null)
+                {
+                    <li>
+                        <a href="@Url.Action("HomeBonista", "Home" )">
+                            <i class="fa fa-user fa-2x"></i>  My Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("SignOut", "UsuarioBonistas" )">
+                            <i class="fa fa-sign-out fa-2x"></i>  Sign Out
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="@Url.Action("LoginUser", "UsuarioBonistas" )">
+                            <i class="fa fa-sign-in fa-2x"></i>  Log In
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "UsuarioBonistas" )">
+                            <i class="fa fa-user-plus fa-2x"></i>  Sign Up
+                        </a>
+                    </li>
+                }
+            } 
+
+            <li>
+                <a href="https://www.alicorp.com.pe/es/inversionistas/" target="_blank">
+                    <i class="fa fa-pagelines fa-2x"></i>  Alicorp Investors
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Footer -->
+    @RenderBody()
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li>
+                    <a href="#" class="icon fa-facebook">
+                        <span class="label">Facebook</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="icon fa-twitter">
+                        <span class="label">Twitter</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="icon fa-instagram">
+                        <span class="label">Instagram</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="icon fa-linkedin">
+                        <span class="label">LinkedIn</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; @DateTime.Now.Year - Finance Your Life</li>
+            </ul> 
+            <ul>
+                Developed by Victor Pachari Vega
+            </ul>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+

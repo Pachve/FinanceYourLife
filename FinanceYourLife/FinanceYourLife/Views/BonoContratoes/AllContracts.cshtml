@@ -1,0 +1,131 @@
+﻿@model IEnumerable<FinanceYourLife.Models.BonoContrato> 
+
+@{
+    ViewBag.Title = "AllContracts";
+    Layout = "~/Views/Shared/_Layout_AllContracts.cshtml";
+    var TIA = 0.00;
+} 
+
+<title>All Contracts Made</title>
+ 
+<div class="table_flujoPeriodico">
+    <center>
+        <h1>
+            Todos los Contratos realizados
+        </h1>
+    </center>
+    <br />
+    <table class="table table-bordered border_tabla">
+        <tbody class="border_tabla" style="width:1200px">
+            <tr>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    ID
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    VN ($)
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    VC ($)
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    Años
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    Frecuencia Pago
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    TIA (%)
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    Tipo
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    Capitalizacion
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    TEA Eq. (%)
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:70px;text-align:center">
+                    COK (%)
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    IR (%)
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    Fecha De Compra
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    Empresa Emisora
+                </th>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    Opciones
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.IDBonoContrato)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ValorNominal)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ValorComercial)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.NroAños)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.FrecuenciaPago)
+                    </td>
+                    @switch ((int)(item.TasaInteresAnual))
+                    {
+                        case 7:
+                            TIA = 7.50;
+                            break;
+                        case 8:
+                            TIA = 8.45;
+                            break;
+                        case 9:
+                            TIA = 9.50;
+                            break;
+                    }
+                    <td style="text-align:center">
+                        @TIA
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.TipoTasaInteres)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Capitalizacion)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.TasaInteresAnual)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.TasaDescuentoAnual)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ImpuestoRenta)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.FechaEmision)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.EmpresaEmisora.Nombre)
+                    </td>
+                    <td style="text-align:center">
+                        <a type="button" class="btn btn-success" style="font-size:15px;margin-right:8px;width:150px" href="@Url.Action("VerFlujoPagosByIDBono", "FlujoPeriodicoes",new { IDBono = item.IDBonoContrato })">Ver Flujo De Pagos</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-sm-12 col-xs-12">
+        <center>
+            <a type="button" class="btn btn-success" style="font-size:20px; width:180px" href="@Url.Action("HomeBonista", "Home")">Regresar</a>
+        </center>
+    </div>
+</div>

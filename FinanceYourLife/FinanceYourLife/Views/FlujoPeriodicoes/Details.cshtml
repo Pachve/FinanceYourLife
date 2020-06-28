@@ -1,0 +1,114 @@
+﻿@model FinanceYourLife.Models.FlujoPeriodico
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FlujoPeriodico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BonoIndexado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BonoIndexado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cupon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cupon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amortizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amortizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Escudo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Escudo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlujoEmisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlujoEmisor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlujoEmisorEscudo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlujoEmisorEscudo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlujoBonista)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlujoBonista)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorBonoDCP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorBonoDCP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BonoContrato.FrecuenciaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BonoContrato.FrecuenciaPago)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDFlujoPeriodico }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

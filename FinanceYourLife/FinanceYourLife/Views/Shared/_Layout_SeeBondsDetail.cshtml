@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "_Layout_SeeBondsDetail";
+} 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Bond Details</title>
+    <link rel="stylesheet" href="~/Content/layoutHomeBonista.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="~/Content/BondsIssued.css" />
+    <link rel="stylesheet" href="~/Content/StyleSignInSignUp.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Validations/jquery-numeric/jquery.numeric.js"></script>
+    <script src="~/Scripts/accounting.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="body_bondsDetails">
+    <header>
+        <h1><a href="~/"><i class="fa fa-chart-line fa-2x"></i>  FINANCE YOUR LIFE</a></h1>
+    </header>
+
+    <nav style="margin-top:10px">
+        <a href="@Url.Action("HomeFinanceYourLife", "Home")" class="elements">
+            FinanceYourLife
+        </a>
+        <a href="@Url.Action("HomeBonista", "Home")" class="elements">
+            My Profile
+        </a>
+        <a href="@Url.Action("SeeBondsIssued", "BonoContratoes")" class="elements">
+            See Bonds Issued
+        </a>
+        <a href="@Url.Action("AllContracts", "BonoContratoes")" class="elements">
+            All Contract's
+        </a>
+        <a href="@Url.Action("SignOut", "UsuarioBonistas")" class="elements">
+            Sign Out
+        </a>
+        <div class="animation start-blog"></div>
+    </nav>
+    <div class="container" style="margin-top:5px; padding-top:5px">
+        @RenderBody()
+        <hr />
+        <footer class="container-fluid bg-inverse col-md-12" style="padding-top:50px">
+            <p class="p_style" style="color:white">&copy; @DateTime.Now.Year - Finance Your Life</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: true)
+</body>
+</html>
+

@@ -1,0 +1,547 @@
+﻿
+@{
+    ViewBag.Title = "SeeBondsDetail";
+    Layout = "~/Views/Shared/_Layout_SeeBondsDetail.cshtml";
+}
+@{
+    FinanceYourLife.ExternalClasses.BonoContratoClass objBono = (FinanceYourLife.ExternalClasses.BonoContratoClass)Session[FinanceYourLife.Constantes.SessionName.Bono];
+    FinanceYourLife.ExternalClasses.CostesInicialesClass objCostoInicial = (FinanceYourLife.ExternalClasses.CostesInicialesClass)Session[FinanceYourLife.Constantes.SessionName.CostoInicial];
+} 
+
+<form action="/FlujoPeriodicoes/GenerarFlujoPeriodico" method="post" id="formBondsDetails" class="form_login" style="width:940px;height:auto">
+    <div class="form-group col-md-12" style="padding-top:20px;padding-bottom:20px">
+        <label class="control-label col-md-6 label_style" style="text-align:right">
+            <strong>
+                Tipo de Moneda
+            </strong>
+        </label>
+        <div class="col-md-6">
+            <select id="tipoMoneda" name="selectTipoMoneda" class="form-control" style="width:170px" required onchange="conversionDeMoneda()">
+                <option hidden></option>
+                <option>Dólar Americano</option>
+                <option>Euro</option>
+                <option>Sol</option>
+            </select>
+        </div>
+    </div> 
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Valor Nominal ($)
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <input type="number" step="0.01" readonly="readonly" id="VNDolar" name="valorNominalDolar" class="form-control"
+                        value="@objBono.ValorNominal" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:left">
+                <strong>
+                    Valor Comercial ($)
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <input type="number" step="0.01" readonly="readonly" id="VCDolar" name="valorComercialDolar" class="form-control"
+                        value="@objBono.ValorComercial" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label id="VNLabel" class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Valor Nominal
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <input type="text" step="0.01" readonly="readonly" id="VN" name="valorNominal" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label id="VCLabel" class="control-label col-md-6 label_style" style="text-align:left;padding-right:0px">
+                <strong>
+                    Valor Comercial
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <input type="text" step="0.01" readonly="readonly" id="VC" name="valorComercial" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Años Totales
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <input id="nroAños" type="number" readonly="readonly" name="tiempoTotal" class="form-control"
+                        value="@objBono.NroAños" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Dias por Año
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <input type="number" readonly="readonly" name="diasPorAño" class="form-control"
+                        value="@objBono.DiasPorAño" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Frecuencia de Pago
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <select id="frecuenciaPago" name="selectFrecuenciaPago" class="form-control" required onchange="calcularPeriodosTotales()">
+                    <option hidden></option>
+                    <option>Diaria</option>
+                    <option>Mensual</option>
+                    <option>Bimestral</option>
+                    <option>Trimestral</option>
+                    <option>Cuatrimestral</option>
+                    <option>Semestral</option>
+                    <option>Anual</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Periodos Totales
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <input id="periodosTotales" type="number" readonly="readonly" name="periodosTotales" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Tipo Tasa de Interés
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <select id="tipoTasa" name="selectTipoTasa" class="form-control" required onchange="calcularTEA()">
+                    <option hidden></option>
+                    <option>Tasa Nominal</option>
+                    <option>Tasa Efectiva</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Capitalización
+                </strong>
+            </label>
+            <div class="col-md-6">
+                <select id="cap" name="selectCap" class="form-control" disabled required onchange="calcularTEA()">
+                    <option hidden></option>
+                    <option>Diaria</option>
+                    <option>Mensual</option>
+                    <option>Bimestral</option>
+                    <option>Trimestral</option>
+                    <option>Cuatrimestral</option>
+                    <option>Semestral</option>
+                    <option>Anual</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:center">
+                <strong>
+                    Tasa Interés Anual (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:10px">
+                <input type="text" readonly="readonly" id="TIA" name="TIA" class="form-control decimal-6-places alternative" min="0"
+                        maxlength="8" value="@objBono.TasaInteresAnual" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:center">
+                <strong>
+                    TEA Equivalente (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:25px">
+                <input type="text" readonly="readonly" id="TEA" name="TEA" class="form-control decimal-2-places alternative" min="0"
+                        maxlength="8" style="width:139px" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-7 label_style" style="text-align:center">
+                <strong>
+                    Tasa Descuento Anual (%)
+                </strong>
+            </label>
+            <div class="col-md-5" style="padding-left:0px">
+                <input type="text" readonly="readonly" id="COK" name="COK" class="form-control decimal-6-places alternative" min="0"
+                        maxlength="8" value="@objBono.TasaDescuentoAnual" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Impuesto (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:20px">
+                <input type="text" readonly="readonly" id="IR" name="IR" class="form-control decimal-6-places alternative" min="0"
+                        maxlength="8" value="@objBono.ImpuestoRenta" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Prima (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:0px">
+                <input type="text" readonly="readonly" id="prima" name="prima" class="form-control decimal-6-places alternative" min="0"
+                        maxlength="8" value="@objCostoInicial.PorcPrima" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:center">
+                <strong>
+                    Estructuración (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:25px">
+                <input type="text" readonly="readonly" id="estruct" name="estruct" class="form-control decimal-6-places alternative" min="0" style="width:140px"
+                        maxlength="8" value="@objCostoInicial.PorcEstructuracion" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Colocación (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:0px">
+                <input type="text" readonly="readonly" id="col" name="col" class="form-control decimal-6-places alternative" min="0"
+                        maxlength="8" value="@objCostoInicial.PorcColocacion" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Flotación (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:25px">
+                <input type="text" readonly="readonly" id="flot" name="flot" class="form-control decimal-6-places alternative" min="0" style="width:140px"
+                        maxlength="8" value="@objCostoInicial.PorcFlotacion" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    CAVALI (%)
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:25px">
+                <input type="text" readonly="readonly" id="cav" name="cav" class="form-control decimal-6-places alternative" min="0"
+                        maxlength="8" value="@objCostoInicial.PorcCAVALI" title="This should be a number with up to 6 decimal places." />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Fecha Emisión
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:25px">
+                <input type="text" readonly="readonly" name="fechaEmisión" class="form-control" style="width:140px"
+                        value="@objBono.FechaEmision" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Fecha y Hora Actual
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:30px">
+                <input type="datetime" readonly="readonly" name="fechaActual" class="form-control" style="width:160px"
+                       value="@DateTime.Now" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-6 label_style" style="text-align:right">
+                <strong>
+                    Plan de Pago
+                </strong>
+            </label>
+            <div class="col-md-6" style="padding-left:30px">
+                <select id="planPago" name="selectPlanPago" class="form-control" required>
+                    <option hidden></option>
+                    <option>Método Americano</option>
+                    <option>Método Alemán</option>
+                    <option>Método Francés</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 col-xs-12" style="margin-top:10px">
+                <center>
+                    <a type="button" class="btn btn-success" style="font-size:20px;margin-right:8px;" href="@Url.Action("SeeBondsIssued", "BonoContratoes")">Cancel</a>
+                    <button id="generarFlujo" type="submit" class="btn btn-success" style="font-size:20px; width:240px">Generar Flujo de Pagos</button>
+                </center>
+            </div>
+        </div>
+</form> 
+
+<script>
+    //function pageLoad() {
+    //    var VN = document.getElementById("VN").value;
+    //    var VC = document.getElementById("VC").value;
+    //    var TEA = document.getElementById("TEA").value;
+    //    var COK = document.getElementById("COK").value;
+    //    var IR = document.getElementById("IR").value;
+    //    //-------------//
+    //    let opciones = {
+    //        symbol: '$',
+    //        decimal: '.',
+    //        thousand: ',',
+    //        precision: 3
+    //    };
+    //    let formatoVN = accounting.formatNumber(VN, '$', 2, ',', '.');
+    //    let formatoVC = accounting.formatMoney(VC, '$', 2, ',', '.');
+    //    //let formatoTEA = accounting.formatMoney(TEA, '$', 2, ',', '.');
+    //    //let formatoCOK = accounting.formatMoney(VN, '$', 2, ',', '.');
+    //    //let formatoIR = accounting.formatMoney(VN, '$', 2, ',', '.');
+    //}
+
+    function onlyNumberKey(evt) {
+
+        // Only ASCII charactar in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 47 && ASCIICode < 58 || ASCIICode == 44)
+            return true;
+        return false;
+    }
+    function changeToNumber() {
+        document.getElementById("TEA").setAttribute("type", "number")
+    } 
+    function validarSelects() {
+        var frecuenciaPago = document.getElementById('frecuenciaPago'); 
+        var tipoTasa = document.getElementById('tipoTasa'); 
+        var cap = document.getElementById('cap');
+        if (frecuenciaPago.value == 0 ||
+            frecuenciaPago.value == "Elegir opción") {
+            alert("Selecciona Una opción");
+            nombreVariable.focus(); 
+            $('#formBondsDetails').prop('Action', '#');
+        }
+    } 
+    function conversionDeMoneda() { 
+        tipoMoneda = document.getElementById("tipoMoneda").value;
+        VNDolar = document.getElementById("VNDolar").value;
+        VCDolar = document.getElementById("VCDolar").value; 
+        var VNEquivalente; 
+        var VCEquivalente;
+        var factor = 0; 
+        var simbolo;
+        switch (tipoMoneda) {
+            case "Dólar Americano":
+                factor = 1; 
+                simbolo = "$";
+                break;
+            case "Euro":
+                factor = 0.89; 
+                simbolo = "€";
+                break;
+            case "Sol":
+                factor = 3.54; 
+                simbolo = "S/";
+                break;
+        } 
+
+        VNEquivalente = VNDolar * factor; 
+        VCEquivalente = VCDolar * factor;
+        VNEquivalente = VNEquivalente.toFixed(2); 
+        VCEquivalente = VCEquivalente.toFixed(2);
+        //VNEquivalente = VNEquivalente.toPrecision(8);
+        VNEquivalente = VNEquivalente.replace(".", ","); 
+        //VCEquivalente = VCEquivalente.toPrecision(8);  
+        VCEquivalente = VCEquivalente.replace(".", ","); 
+        document.getElementById("VN").value = VNEquivalente; 
+        document.getElementById("VC").value = VCEquivalente; 
+
+        document.getElementById("VNLabel").innerHTML = "Valor Nominal (" + simbolo + ")"; 
+        document.getElementById("VCLabel").innerHTML = "Valor Comercial (" + simbolo + ")";
+    }
+    function calcularPeriodosTotales() {
+        nroAños = document.getElementById("nroAños").value;
+        frecuenciaPago = document.getElementById("frecuenciaPago").value;
+        var total;
+        switch (frecuenciaPago) {
+            case "Diaria":
+                total = 360 * nroAños;
+                break;
+            case "Mensual":
+                total = 12 * nroAños;
+                break;
+            case "Bimestral":
+                total = 6 * nroAños;
+                break;
+            case "Trimestral":
+                total = 4 * nroAños;
+                break;
+            case "Cuatrimestral":
+                total = 3 * nroAños;
+                break;
+            case "Semestral":
+                total = 2 * nroAños;
+                break;
+            case "Anual":
+                total = nroAños;
+                break;
+        } 
+        document.getElementById("periodosTotales").value = total;
+    } 
+    function calcularTEA() { 
+        tipoTasa = document.getElementById("tipoTasa").value;
+        cap = document.getElementById("cap").value;
+        TIA = parseFloat(document.getElementById("TIA").value.replace(',', '.')); 
+        TIA = TIA / 100;
+        var TEA; 
+        var factor = 1;
+        if (tipoTasa == "Tasa Nominal") {
+            switch (cap) {
+                case "Diaria": 
+                    factor = 360;
+                    break;
+                case "Mensual": 
+                    factor = 12;
+                    break;
+                case "Bimestral":
+                    factor = 6;
+                    break;
+                case "Trimestral":
+                    factor = 4;
+                    break;
+                case "Cuatrimestral":
+                    factor = 3;
+                    break;
+                case "Semestral":
+                    factor = 2;
+                    break;
+                case "Anual":
+                    factor = 1;
+                    break;
+            }
+        }
+
+        TEA = ((1 + TIA / factor) ** factor - 1); 
+        TEA = TEA * 100;
+        TEA = TEA.toPrecision(7); 
+        TEA = TEA.replace(".", ",");
+        document.getElementById("TEA").value = TEA;
+    }
+</script>
+<script type="text/javascript">
+    $('.decimal-6-places').numeric({ decimalPlaces: 6 }); 
+    $('.alternative').numeric({ altDecimal: '.', decimal:',' });
+    //$('.alternative-decimal-separator').numeric({ altDecsimal: '.' });
+    //$('.alternative').numeric({ altDecimal: '.', decimal: '.' });
+    $("#tipoTasa").change(function () {
+        var tipoTasa = $('select[id=tipoTasa]').val();
+        if (tipoTasa === "Tasa Nominal") {
+            $("#cap").prop('disabled', false);
+        }
+        if (tipoTasa === "Tasa Efectiva") {
+            $("#cap").prop('disabled', true);
+        }
+    });
+    $("#generarFlujo").click(function () {
+        var frecuenciaPago = $('select[id=frecuenciaPago]').val();
+        var tipoTasaInteres = $('select[id=tipoTasa]').val();
+        var cap = $('select[id=cap]').val();
+        if (frecuenciaPago === null || frecuenciaPago === null) {
+            alert("Error, ingrese una frecuencia de pago válida.");
+        }
+        if (tipoTasaInteres === null || tipoTasaInteres === null) {
+            alert("Error, ingrese un tipo de tasa de interés válida.");
+        }
+        if (tipoTasaInteres === null && (cap === "Elegir opción" || cap === null)) {
+            alert("Error, ingrese un tipo de capitalización válida.");
+        }
+    });
+    $("select[id=frecuenciaPago]").change(function () {
+        var nroAños = $('#nroAños').val();
+        var frecuenciaPago = $('select[id=frecuenciaPago]').val();
+        var total;
+        $('#periodosTotales').val();
+        switch (frecuenciaPago) {
+            case "Diaria":
+                total = 360 * nroAños;
+                break;
+            case "Mensual":
+                total = 12 * nroAños;
+                break;
+            case "Bimestral":
+                total = 6 * nroAños;
+                break;
+            case "Trimestral":
+                total = 4 * nroAños;
+                break;
+            case "Cuatrimestral":
+                total = 3 * nroAños;
+                break;
+            case "Semestral":
+                total = 2 * nroAños;
+                break;
+            case "Anual":
+                total = nroAños;
+                break;
+        }
+        $('#periodosTotales').val() = total;
+        alert("The text has been changed.");
+    });
+    $(document).ready(function () {
+        
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

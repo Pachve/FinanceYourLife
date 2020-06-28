@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "HomeBonista";
+    Layout = "~/Views/Shared/_Layout_HomeBonista.cshtml";
+} 
+@{ 
+    FinanceYourLife.Models.UsuarioBonista objUsuario = (FinanceYourLife.Models.UsuarioBonista)Session[FinanceYourLife.Constantes.SessionName.User];
+}
+<!--Body HomeBonista-->
+
+<center>
+    <h2>
+        <i class="fa fa-user fa-2x"></i> 
+        <span>  </span>
+        <strong style="font-size:36px">My Profile</strong>
+    </h2>
+</center> 
+<div class="form_login" style="height:270px">
+    <dl class="dl-horizontal fields_2">
+        <dt>
+            FirstName
+        </dt>
+
+        <dd>
+            @objUsuario.Nombres
+        </dd>
+
+        <dt>
+            LastName
+        </dt>
+
+        <dd>
+            @objUsuario.Apellidos
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @objUsuario.Correo
+        </dd>
+
+        <dt>
+            Password
+        </dt>
+
+        <dd>
+            @objUsuario.Contraseña
+        </dd>
+
+        <dt>
+            Number RUC
+        </dt>
+
+        <dd>
+            @objUsuario.RUC
+        </dd>
+
+        <dt>
+            User Type
+        </dt>
+
+        <dd>
+            @objUsuario.TipoUsuario.TipoPersona
+        </dd>
+    </dl>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-10">
+            <a type="button" class="btn btn-primary" href="@Url.Action("Edit","UsuarioBonistas", new { id=objUsuario.IDUsuarioBonista})">Edit Profile</a>
+        </div>
+    </div>
+</div>

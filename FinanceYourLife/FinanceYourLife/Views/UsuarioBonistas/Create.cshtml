@@ -1,0 +1,106 @@
+﻿@model FinanceYourLife.Models.UsuarioBonista
+
+@{
+    ViewBag.Title = "Register User";
+    Layout = "~/Views/Shared/_LayoutRegisterBonista.cshtml";
+}
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/StyleSignInSignUp.css" />
+    <title>Register User</title>
+</head>
+<center>
+    <h2>Registration Page</h2>
+</center>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal form1">
+        <h4>
+            <strong>
+                Complete the following fields
+            </strong>
+        </h4>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombres, "FirstName", htmlAttributes: new { @class = "control-label col-md-4 fields" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Nombres, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombres, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Apellidos, "LastName", htmlAttributes: new { @class = "control-label col-md-4 fields" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Apellidos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RUC, "RUC Number", htmlAttributes: new { @class = "control-label col-md-4 fields" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.RUC, new { htmlAttributes = new { @class = "form-control", @id = "inputRuc", @oninput = "validarInputRUC(this)", @maxlength = "11" } })
+                @Html.ValidationMessageFor(model => model.RUC, "", new { @class = "text-danger" })
+                <span id="resultado"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Correo, "Email", htmlAttributes: new { @class = "control-label col-md-4 fields" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contraseña, "Password", htmlAttributes: new { @class = "control-label col-md-4 fields" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Contraseña, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contraseña, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmarContraseña, "Confirm Password", htmlAttributes: new { @class = "control-label col-md-4 fields" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ConfirmarContraseña, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmarContraseña, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label class="label-danger" style="font-size:24px">@ViewBag.DuplicateEmail</label>
+            </center>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 col-xs-12">
+                <center>
+                    <button class="btn btn-primary style_1" type="button" onclick="window.location.href='/Home/HomeFinanceYourLife'"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Cancel</button>
+                    <button class="btn btn-primary style_1" type="submit">Create Account&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
+                </center>
+            </div>
+        </div>
+    </div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/FunctionsForLoginRegister.js"></script>
+<script src="~/Scripts/sweetAlert.min.js"></script>
+<script>
+    @*if (@ViewData["DuplicateEmail"])!=null) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'The entered email already exists. Please enter another email.',
+            footer: '<a href>Why do I have this issue?</a>'
+        })
+    }*@
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

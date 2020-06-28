@@ -1,0 +1,99 @@
+﻿@model IEnumerable<FinanceYourLife.Models.FlujoPeriodico>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BonoIndexado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cupon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amortizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Escudo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FlujoEmisor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FlujoEmisorEscudo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FlujoBonista)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorBonoDCP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BonoContrato.FrecuenciaPago)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BonoIndexado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cupon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cuota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amortizacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Escudo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FlujoEmisor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FlujoEmisorEscudo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FlujoBonista)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorBonoDCP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BonoContrato.FrecuenciaPago)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDFlujoPeriodico }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDFlujoPeriodico }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDFlujoPeriodico })
+        </td>
+    </tr>
+}
+
+</table>

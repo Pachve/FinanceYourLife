@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eca1a83e5a9b4cf19295837b9e629742" Name="Diagram1">
+        <EntityTypeShape EntityType="FinanceYourLifeModel.AgenteExterno" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanceYourLifeModel.BonoContrato" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanceYourLifeModel.CostesIniciales" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanceYourLifeModel.EmpresaEmisora" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanceYourLifeModel.FlujoPeriodico" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanceYourLifeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanceYourLifeModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanceYourLifeModel.UsuarioBonista" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="FinanceYourLifeModel.FK_AgenteExterno_EmpresaEmisora" ManuallyRouted="false" />
+        <AssociationConnector Association="FinanceYourLifeModel.FK_BonoContrato_CostesIniciales" ManuallyRouted="false" />
+        <AssociationConnector Association="FinanceYourLifeModel.FK_BonoContrato_EmpresaEmisora" ManuallyRouted="false" />
+        <AssociationConnector Association="FinanceYourLifeModel.FK_BonoContrato_UsuarioBonista" ManuallyRouted="false" />
+        <AssociationConnector Association="FinanceYourLifeModel.FK_FlujoPeriodico_BonoContrato" ManuallyRouted="false" />
+        <AssociationConnector Association="FinanceYourLifeModel.FK_TipoUsuario_UsuarioBonista" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

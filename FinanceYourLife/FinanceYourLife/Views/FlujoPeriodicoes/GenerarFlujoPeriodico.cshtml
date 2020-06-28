@@ -1,0 +1,265 @@
+﻿@model IEnumerable<FinanceYourLife.Models.FlujoPeriodico> 
+
+@{
+    ViewBag.Title = "Flujo de Pagos";
+    Layout = "~/Views/Shared/_Layout_GenerarFlujoPeriodico.cshtml";
+    FinanceYourLife.Models.BonoContrato objBono = (FinanceYourLife.Models.BonoContrato)Session[FinanceYourLife.Constantes.SessionName.Bono];
+    //decimal objAmortizacion = (decimal)Session[FinanceYourLife.Constantes.SessionName.Amortizacion];
+    FinanceYourLife.ExternalClasses.Results objResults = (FinanceYourLife.ExternalClasses.Results)Session[FinanceYourLife.Constantes.SessionName.Resultados];
+    int periodosPorAño = 0;
+    var simbolo="";
+}
+
+<div class="table_flujoPeriodico">
+    <center>
+        <h1>
+            Flujo de Pagos por el @objResults.planPago.ToUpper()
+        </h1>
+    </center>
+    <table class="table table-bordered border_tabla" style="width:1100px; margin-right:5px;margin-top:20px">
+        <tbody class="border_tabla" style="width:1200px">
+            <tr>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    ID
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:70px;text-align:center">
+                    PG
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Bono
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Bono Indexado
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Cupon
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Cuota
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Amortización
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:70px;text-align:center">
+                    Prima
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:70px;text-align:center">
+                    Escudo
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    F.Emisor
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    F.E Escudo
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:80px;text-align:center">
+                    F.B
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    V. Del Bono
+                </th>
+            </tr>
+
+            @for (int i = 0; i <= Model.Count(); i++)
+            {
+                <tr>
+                    <td style="text-align:center">@(i)</td>
+                    @if (i == 0)
+                    {
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="text-align:center;color:blue">@objResults.flujoEmisorCero</td>
+                        <td style="text-align:center;color:blue">@objResults.flujoEmisorEscudoCero</td>
+                        <td style="text-align:center;color:red">@objResults.flujoBonistaCero</td>
+                        <td style="text-align:center;color:blue">@objResults.PrecioActualBono</td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;padding:4px">
+                            <select id="@(i)" name="selectCap" class="form-control" style="padding-left:6px;width:55px">
+                                <option selected>N</option>
+                                <option>P</option>
+                                <option>T</option>
+                            </select>
+                        </td>
+                        <td style="text-align:center;color:blue;">@Model.ElementAt(i - 1).Bono</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).BonoIndexado</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Cupon</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Cuota</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Amortizacion</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Prima</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).Escudo</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).FlujoEmisor</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).FlujoEmisorEscudo</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).FlujoBonista</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).ValorBonoDCP</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="form-group col-md-12">
+        <center>
+            <a id="actualizar" type="button" class="btn btn-success" style="font-size:20px;margin-right:8px;" href="#">Actualizar</a>
+        </center>
+    </div>
+    <center>
+        <h1>
+            Resultados de la Operación
+        </h1>
+    </center>
+    <table class="table table-bordered border_tabla" style="margin-left:350px;width:450px;margin-top:20px">
+        <tbody class="border_tabla" style="text-align:center;font-size:20px">
+            @switch (objResults.tipoMoneda)
+            {
+                case "Dólar Americano":
+                    simbolo = "$";
+                    break;
+                case "Euro":
+                    simbolo = "€";
+                    break;
+                case "Sol":
+                    simbolo = "S/.";
+                    break;
+            }
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center;width:250px">Valor Nominal</th>
+                <td id="VN" style="color:darkblue;font-weight: bold">@simbolo @objBono.ValorNominal</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Valor Comercial</th>
+                <td id="VC" style="color:darkblue;font-weight: bold">@simbolo @objBono.ValorComercial</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Frecuencia del Cupón</th>
+                <td style="color:darkblue;font-weight: bold">@objBono.FrecuenciaPago</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Frecuencia de Capitalización</th>
+                <td style="color:darkblue;font-weight: bold">@objBono.Capitalizacion</td>
+            </tr>
+            @switch (objBono.FrecuenciaPago)
+            {
+                case "Diaria":
+                    periodosPorAño = 360;
+                    break;
+                case "Mensual":
+                    periodosPorAño = 12;
+                    break;
+                case "Bimestral":
+                    periodosPorAño = 6;
+                    break;
+                case "Trimestral":
+                    periodosPorAño = 4;
+                    break;
+                case "Cuatrimestral":
+                    periodosPorAño = 3;
+                    break;
+                case "Semestral":
+                    periodosPorAño = 2;
+                    break;
+                case "Anual":
+                    periodosPorAño = 1;
+                    break;
+            }
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Nº Períodos por Año</th>
+                <td style="color:darkblue;font-weight: bold">@periodosPorAño</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Nº Total de Periodos</th>
+                <td style="color:darkblue;font-weight: bold">@(objBono.NroAños * periodosPorAño)</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Tasa Efectiva Anual(%)</th>
+                <td id="TEA" style="color:darkblue;font-weight: bold">@objBono.TasaInteresAnual %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Tasa Efectiva del Periodo(%)</th>
+                <td id="TEP" style="color:darkblue;font-weight: bold">@objResults.TEP %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">COK del Periodo(%)</th>
+                <td id="COKP" style="color:darkblue;font-weight: bold">@objResults.COKP %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;width:160px;text-align:center">TIR Bonista(%)</th>
+                <td id="TIRB" style="color:darkblue;font-weight: bold">@objResults.TIRBonista %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">TREA Bonista(%)</th>
+                <td id="TREAB" style="color:darkblue;font-weight: bold">@objResults.TREABonista %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Costes Iniciales Bonista</th>
+                <td id="CIB" style="color:darkblue;font-weight: bold">@simbolo @objResults.CIBonista</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">TIR Emisor(%)</th>
+                <td id="TIRE" style="color:darkblue;font-weight: bold">@objResults.TIREmisor %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">TIR Emisor c/ Escudo(%)</th>
+                <td id="TIREEscudo" style="color:darkblue;font-weight: bold">@objResults.TIREmisorEscudo %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">TCEA Emisor(%)</th>
+                <td id="TCEAE" style="color:darkblue;font-weight: bold">@objResults.TCEAEmisor %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">TCEA Emisor c/ Escudo(%)</th>
+                <td id="TCEAEEscudo" style="color:darkblue;font-weight: bold">@objResults.TCEAEmisorEscudo %</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Costes Iniciales Emisor</th>
+                <td id="CIE" style="color:darkblue;font-weight: bold">@simbolo @objResults.CIEmisor</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Precio Actual</th>
+                <td id="PABono" style="color:darkblue;font-weight: bold">@simbolo @objResults.PrecioActualBono</td>
+            </tr>
+            <tr class="border_tabla">
+                <th style="border:2px solid; border-color:darkslategrey;text-align:center">Utilidad/Perdida</th>
+                <td id="UP" style="color:darkblue;font-weight: bold">@simbolo @objResults.UtilidadPerdida</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div class="col-sm-12 col-xs-12">
+            <center>
+                <a id="cancelar" type="button" class="btn btn-success" style="font-size:20px;margin-right:8px;" href="#">Cancelar</a>
+                <a id="btnPrint" type="button" class="btn btn-success" style="font-size:20px;margin-right:8px;" href="#">Generar PDF</a>
+                <a type="button" class="btn btn-success" style="font-size:20px; width:280px" href="@Url.Action("GenerarContrato", "BonoContratoes")">Generar Contrato de Compra</a>
+            </center>
+        </div>
+    </div>
+</div> 
+
+<script>
+    $('#cancelar').click(function () {
+        window.history.go(-1);
+    });
+    function getAllParaElems()
+    {
+        var allParas = document.getElementsByTagName("p");
+      var num = allParas.length;
+    }
+</script>

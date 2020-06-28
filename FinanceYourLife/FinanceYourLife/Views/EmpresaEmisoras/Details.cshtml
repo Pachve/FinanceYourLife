@@ -1,0 +1,58 @@
+﻿@model FinanceYourLife.Models.EmpresaEmisora
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmpresaEmisora</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RUC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RUC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SedePrincipal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SedePrincipal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rubro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rubro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgenteExterno.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgenteExterno.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDEmpresaEmisora }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

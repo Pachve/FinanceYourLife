@@ -1,0 +1,65 @@
+﻿@model FinanceYourLife.Models.UsuarioBonista
+
+@{
+    ViewBag.Title = "Login User";
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/StyleSignInSignUp.css" /> 
+    <title>Login User</title>
+</head>
+<center>
+    <h2>Login Page</h2>
+</center>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal form_login">
+    <h4>
+        <strong>
+            Complete the following fields
+        </strong>
+    </h4>
+    <br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Correo, "Email", htmlAttributes: new { @class = "control-label col-md-3 fields" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+            @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Contraseña, "Password", htmlAttributes: new { @class = "control-label col-md-3 fields" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Contraseña, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Contraseña, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <center>
+            <label class="label-danger" style="font-size:20px">@ViewBag.InvalidUser</label>
+        </center>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <div class="col-sm-12 col-xs-12">
+            <center>
+                <button class="btn btn-primary style_2" type="button" onclick="window.location.href='/Home/HomeFinanceYourLife'"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Cancel</button>
+                <button class="btn btn-primary style_2" type="submit">Login&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
+            </center>
+        </div>
+    </div>
+</div>
+} 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,122 @@
+﻿@model IEnumerable<FinanceYourLife.Models.FlujoPeriodico>
+
+@{
+    ViewBag.Title = "VerFlujoPagosByIDBono";
+    Layout = "~/Views/Shared/_Layout_AllContracts.cshtml";
+    FinanceYourLife.ExternalClasses.Results objResults = (FinanceYourLife.ExternalClasses.Results)Session[FinanceYourLife.Constantes.SessionName.Resultados];
+} 
+
+<title>Flujo de Pagos por Bono Contrato</title>
+<div class="table_flujoPeriodico">
+    <center>
+        <h1>
+            Flujo de Pagos correspondientes al Bono con ID=@Model.ElementAt(0).FK_IDBonoContrato
+        </h1>
+    </center>
+    <table class="table table-bordered border_tabla" style="width:1100px; margin-right:5px;margin-top:20px">
+        <tbody class="border_tabla" style="width:1200px">
+            <tr>
+                <th style="border:2px solid; border-color:darkslategrey;width:40px;text-align:center">
+                    ID
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:70px;text-align:center">
+                    PG
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Bono
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Bono Indexado
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Cupon
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Cuota
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    Amortización
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:70px;text-align:center">
+                    Prima
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:70px;text-align:center">
+                    Escudo
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    F.Emisor
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    F.E Escudo
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:80px;text-align:center">
+                    F.B
+                </th>
+
+                <th style="border:2px solid; border-color:darkslategrey;width:100px;text-align:center">
+                    V. Del Bono
+                </th>
+            </tr>
+
+            @for (int i = 0; i <= Model.Count(); i++)
+            {
+                <tr>
+                    <td style="text-align:center">@(i)</td>
+                    @if (i == 0)
+                    {
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="background-color:lightslategray"></td>
+                        <td style="text-align:center;color:blue">@objResults.flujoEmisorCero</td>
+                        <td style="text-align:center;color:blue">@objResults.flujoEmisorEscudoCero</td>
+                        <td style="text-align:center;color:red">@objResults.flujoBonistaCero</td>
+                        <td style="text-align:center;color:blue">@objResults.PrecioActualBono</td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;padding:4px">
+                            <select id="@(i)" name="selectCap" class="form-control" style="padding-left:6px;width:55px">
+                                <option selected>N</option>
+                                <option>P</option>
+                                <option>T</option>
+                            </select>
+                        </td>
+                        <td style="text-align:center;color:blue;">@Model.ElementAt(i - 1).Bono</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).BonoIndexado</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Cupon</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Cuota</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Amortizacion</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).Prima</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).Escudo</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).FlujoEmisor</td>
+                        <td style="text-align:center;color:red">@Model.ElementAt(i - 1).FlujoEmisorEscudo</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).FlujoBonista</td>
+                        <td style="text-align:center;color:blue">@Model.ElementAt(i - 1).ValorBonoDCP</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-sm-12 col-xs-12">
+        <center>
+            <a type="button" class="btn btn-success" style="font-size:20px; width:180px" href="@Url.Action("AllContracts", "BonoContratoes")">Regresar</a>
+        </center>
+    </div>
+</div>
+

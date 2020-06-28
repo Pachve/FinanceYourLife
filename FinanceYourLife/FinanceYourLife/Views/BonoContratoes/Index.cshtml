@@ -1,0 +1,111 @@
+﻿@model IEnumerable<FinanceYourLife.Models.BonoContrato>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorComercial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorNominal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NroAños)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrecuenciaPago)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiasPorAño)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoTasaInteres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capitalizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TasaInteresAnual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TasaDescuentoAnual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImpuestoRenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEmision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostesIniciales.IDCostesIniciales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpresaEmisora.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioBonista.Nombres)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorComercial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorNominal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NroAños)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrecuenciaPago)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiasPorAño)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoTasaInteres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Capitalizacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TasaInteresAnual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TasaDescuentoAnual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImpuestoRenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEmision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostesIniciales.IDCostesIniciales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpresaEmisora.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioBonista.Nombres)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDBonoContrato }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDBonoContrato }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDBonoContrato })
+        </td>
+    </tr>
+}
+
+</table>
